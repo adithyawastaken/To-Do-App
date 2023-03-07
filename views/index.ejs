@@ -1,0 +1,141 @@
+<%- include('partials/header') -%>
+<body>
+    <h1>ToDoApp</h1>
+    <!-- container-1 -->
+    <div class="container-1">
+        <form>
+
+            <h2>Enter the task:</h2><br>
+            <input type="text" placeholder="Enter the task" maxlength="40" id="input" required> <br>
+            <button id="btn">Add</button>
+            
+        </form>
+       
+    </div>
+    <!-- container-2 -->
+    <div class="container-2">
+<ul>
+<!-- Display the tasks on page load -->
+<% if(taskArr) { %>
+    <% taskArr.map((e)=>{ %>
+           <% if(e.completed){ %>
+            <li id="completed"><button id="btn-li">‎</button><%= e.task %></li>
+            <% } else {%>
+                <li><button id="btn-li">‎</button><%= e.task %></li>
+                <% } %>
+    <% }) %>
+    <% } %>
+</ul>
+
+    </div>
+        <!-- Delete task page -->
+ <div class="deleteTask invisible">
+
+<h2 id="deleteTask-h2">Are you sure you want to delete this task?</h2>
+<div class="button-stuff">
+<button id="yes-btn">Yes</button>
+<button id="no-btn">No</button>
+
+</div>
+    
+    
+</body>
+<script>
+// Declaring variables
+const form = document.querySelector('form')
+const ul = document.querySelector('ul')
+const yesBtn = document.querySelector('#yes-btn')
+const noBtn = document.querySelector('#no-btn')
+const audio = new Audio()
+audio.src = '/interface-124464.mp3'
+
+// Form submission
+form.addEventListener('submit', async(e)=>{
+    e.preventDefault()
+
+    const task = document.querySelector('input').value
+    const ul = document.querySelector('ul')
+    task.value = '';
+  // Posting the task
+    try{
+        const res = await fetch('/add-task', {
+     body: JSON.stringify({task}),
+     method: 'post',
+     headers: {'Content-Type' : 'application/json'},
+})
+const data = await res.json()
+if(data.added){
+// Adding the task to the list 
+  let li = document.createElement('li')
+  let btnbro = document.createElement('button')
+  btnbro.setAttribute('id', 'btn-li')
+  btnbro.innerText = ''
+  li.innerText = task
+  li.appendChild(btnbro)
+  ul.appendChild(li)
+} else {
+    console.log('ok')
+}
+    }
+    catch(err){
+        console.log(err)
+    }
+    
+})
+// checkButton 
+ul.addEventListener('click', async(e)=>{
+// Removing the button from the task's innerText before PUT request
+const ok = e.target.parentElement.innerHTML.toString()
+const task = ok.replace('<button id="btn-li">‎</button>', '')
+
+    if(e.target.getAttribute('id') == 'btn-li'){
+        const completed = true
+        // Adding strikethrough for completed tasks 
+        e.target.parentElement.style.textDecoration = 'line-through'
+        e.target.parentElement.style.backgroundColor = '#e0e0de'
+         audio.play()
+        //Put request for completed tasks
+        await fetch('/completed-task', {
+            method: 'PUT',
+            body: JSON.stringify({completed,task}),
+            headers: {'Content-Type' : 'application/json'}
+        }) 
+    }
+
+
+})
+// Event listener for deleting tasks
+ul.addEventListener('contextmenu', async(e)=>{
+    e.preventDefault()
+    // Declaring variables
+    const container1 = document.querySelector('.container-1')
+    const container2 = document.querySelector('.container-2')
+    const deletePage = document.querySelector('.deleteTask')
+  // toggle to deletePage
+    let task = null
+    // Removing button element from list's innerHTML
+      let ok = e.target.innerHTML.replace('<button id="btn-li">‎</button>', '')
+      task = ok
+      // Toggling betwen containers
+      container1.classList.toggle('invisible')
+      container2.classList.toggle('invisible')
+      deletePage.classList.toggle('invisible')
+      // Event listener for yes button 
+    yesBtn.addEventListener('click', async()=>{
+
+     await fetch('delete-task', {
+      method: 'delete',
+      body : JSON.stringify({task}),
+      headers: {'Content-Type': 'application/json'}
+     })
+     location.reload()
+     
+   })
+})
+// Adding event listener for the no button
+noBtn.addEventListener('click', ()=>{
+    location.reload()
+})
+
+</script>
+</html>

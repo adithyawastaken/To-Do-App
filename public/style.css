@@ -1,0 +1,132 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing:border-box;
+    font-family: 'Quicksand', sans-serif;
+    word-wrap: break-word;
+}
+
+.container-1{
+    display:flex;
+    flex-direction:column;
+    border-style:hidden;
+    margin-top:6%;
+    margin-left:23%;
+    width:50vw;
+    height:11em;
+    align-items:center;
+    align-content:center;
+    box-shadow: 2px 2px 5px 1px #706e70;
+    border-radius:0.4375rem;
+    justify-content:space-around;
+    background-color: #f2f9fa;
+}
+ input{
+    width:23vw;
+    height:2.5rem;
+    font-size:1.25rem;
+    padding-left:0.625rem;
+    border-radius:0.125rem;
+}
+#btn{
+    margin-left:18%;
+    width:12.5rem;
+    height:2.5rem;
+    border-style:solid;
+    border-radius:0.625rem;
+    font-size:1.25rem;
+    background-color: #b72aeb;
+    color:white;
+    margin-top: 1.25rem;
+    margin-bottom:0.625rem;
+    transition:0.1s;
+}
+h1{
+    font-family: 'Poppins', sans-serif;
+    margin-left:40%;
+    font-size:3.125rem;
+    text-decoration:underline;
+    font-weight:12.5rem;
+    margin-top:0.625rem;
+}
+#btn:hover{
+    transform:scale(1.1);
+    background-color: #844cb0;
+}
+h2{
+    margin-left:23%;
+}
+li{
+    padding-left:0.3125rem;
+   border-style:solid;
+   overflow: auto;
+   width:31.25rem;
+   height:3.125rem;
+   font-size:1.25rem;
+   margin:auto;
+   display:flex;
+   gap:0.625rem;
+   align-items:center;
+   margin-top:3.125rem;
+   box-shadow: 2px 2px 5px 1px #706e70;
+   border-radius:0.4375rem;
+}
+#completed{
+    background-color: #e0e0de !important;
+    text-decoration:line-through !important;
+}
+#btn-li{
+    order:-1;
+    border-style:solid;
+border-radius:50%;
+width:1.5rem;
+height:1.5rem;
+background-color: white;
+float:left;
+}
+#btn-li:hover{
+    background-color: #e8ebea;
+    transform:scale(1.1)
+}
+.deleteTask{
+    margin:auto;
+    border-style:solid;
+    margin-top:5%;
+    width:50%;
+    height:25rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center; 
+    gap:3.125rem; 
+    background-color: #fcfbfa;
+    border-style:solid;
+    border-radius:10px;
+    box-shadow: 0.8px 1px 1px 1px #0c0d0c;
+}
+#deleteTask-h2{
+    margin-left:1.125rem;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size:1.875rem;
+}
+.button-stuff button{
+    width:6.25rem;
+    height:3.125rem;
+    border-radius:10px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size:1.25rem;
+    background-color: #e6911c;
+    color:black;
+    transition:0.3s;
+}
+.button-stuff{
+    display:flex;
+    gap:3.125rem;
+    margin-right:2.5rem;
+}
+.button-stuff button:hover{
+    transform:scale(1.1);
+}
+.invisible{
+    display:none;
+}
