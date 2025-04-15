@@ -1,2 +1,2 @@
 # To-Do-App
-This is an online to-do-list application. It's server is created using node js and the db used is firestore.
+An online to-do-list application. It's server is created using node js and the db used is firestore.
